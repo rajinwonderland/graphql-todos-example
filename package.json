@@ -1,6 +1,6 @@
 {
   "name": "todos-graphql-example",
-  "description": "Todo GraphQL Example with Apollo-Server & PouchDB  🎊🎉",
+  "description": "Todo GraphQL Example with Apollo-Server & PouchDB  🎊🎉\n\nUses pouchdb-adapter-memory for storage on the browser",
   "dependencies": {
     "@targos/graphql-iso-date": "3.7.0",
     "apollo-datasource-rest": "latest",

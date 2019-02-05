@@ -10,15 +10,15 @@ const typeDefs = importSchema(path.join(__dirname, './schema.graphql'));
 const resolvers = {
 	DateTime: GraphQLDateTime,
 	Query: {
-		todo: async (root, args, context) => await Todos.findOne(args.id),
+		todo: async (root, args, context) => await Todos.getOne(args.id),
 		allTodos: async (root, args, context) => await Todos.findAll()
 	},
 	Mutation: {
 		createTodo: async (root, args, context) => {
-			console.log('createTodo Args', args);
+			const { name, isComplete } = args.input;
 			return await Todos.create({
-				name: args.input.name,
-				isComplete: args.input.isComplete
+				name,
+				isComplete
 			});
 		}
 	}

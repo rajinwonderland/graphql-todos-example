@@ -6,7 +6,7 @@ const db = new PouchDB('todos', {
 	adapter: 'memory'
 });
 
-class TodosModel {
+class TodosService {
 	constructor() {
 		this.todos = db;
 		this.todos
@@ -22,21 +22,25 @@ class TodosModel {
 			.catch(err => console.error(err));
 	}
 
+	newDate() {
+		return new Date().toISOString();
+	}
+
 	async create({ name, isComplete }) {
 		const todo = await this.todos
 			.post({
-				createdAt: new Date().toISOString(),
-				updatedAt: new Date().toISOString(),
+				createdAt: this.newDate(),
+				updatedAt: this.newDate(),
 				name,
 				isComplete,
 				completionDate: ''
 			})
-			.then(async res => await this.findOne(res.id))
+			.then(async newTodo => await this.getOne(newTodo.id))
 			.catch(err => console.log(err));
 		console.log(todo);
 		return todo;
 	}
-	async findOne(id) {
+	async getOne(id) {
 		const todo = await this.todos
 			.get(id)
 			.then(res => ({
@@ -49,11 +53,20 @@ class TodosModel {
 	async findAll() {
 		const allDocs = await this.todos.allDocs();
 		const todos = await Promise.all(
-			allDocs.rows.map(async obj => await this.findOne(obj.id))
+			allDocs.rows.map(async obj => await this.getOne(obj.id))
 		);
 		console.log(todos);
 		return todos;
 	}
+	async update(id, updates) {
+		const todo = await this.todos
+			.put(id, {
+				...updates
+			})
+			.then(updatedTodo => this.getOne(updatedTodo))
+			.catch(err => console.error(err));
+		return todo;
+	}
 }
 
-module.exports = TodosModel;
+module.exports = TodosService;
