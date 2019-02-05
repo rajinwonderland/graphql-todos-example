@@ -1,0 +1,62 @@
+scalar DateTime
+
+type Mutation {
+  createTodo(input: CreateTodoInput!): Todo
+}
+
+type Query {
+  allTodos(where: AllTodosWhereInput, skip: Int, after: Int, before: Int, first: Int, last: Int): [Todo]
+  todo(id: ID!): Todo
+}
+
+interface Node {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  _id: ID!
+  _rev: String!
+}
+
+type Todo implements Node {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  _id: ID!
+  _rev: String!
+  name: String!
+  isComplete: Boolean!
+  completionDate: DateTime
+}
+
+input AllTodosWhereInput {
+  id: ID
+  name: String
+  isComplete: Boolean
+  createdAt: DateTime
+  updatedAt: DateTime
+  completionDate: DateTime
+}
+
+input CreateTodoInput {
+  name: String!
+  isComplete: Boolean!
+}
+
+enum StatusEnum {
+  SUCCESS
+  ERROR
+}
+
+interface MutationResponsePayload {
+  status: StatusEnum!
+  code: Int
+  message: String
+}
+
+type CreateTodoPayload implements MutationResponsePayload {
+  status: StatusEnum!
+  code: Int
+  message: String
+  todo: Todo
+}
+

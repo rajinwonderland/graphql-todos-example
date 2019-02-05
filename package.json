@@ -1,0 +1,26 @@
+{
+  "name": "todos-graphql-example",
+  "description": "Todo GraphQL Example with Apollo-Server & PouchDB  🎊🎉",
+  "dependencies": {
+    "@targos/graphql-iso-date": "3.7.0",
+    "apollo-datasource-rest": "latest",
+    "apollo-server": "2.1.0",
+    "cuid": "latest",
+    "graphql": "14.0.2",
+    "graphql-import": "0.7.1",
+    "graphql-tools": "4.0.4",
+    "moment": "latest",
+    "pouchdb": "7.0.0",
+    "pouchdb-adapter-memory": "7.0.0"
+  },
+  "license": "MIT",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js localhost 4000"
+  },
+  "keywords": [],
+  "devDependencies": {
+    "@types/graphql": "14.0.1",
+    "nodemon": "1.18.4"
+  }
+}
