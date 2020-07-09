@@ -4,7 +4,7 @@
   "dependencies": {
     "@targos/graphql-iso-date": "3.7.0",
     "apollo-datasource-rest": "latest",
-    "apollo-server": "2.1.0",
+    "apollo-server": "2.15.1",
     "cuid": "latest",
     "graphql": "14.0.2",
     "graphql-import": "0.7.1",
